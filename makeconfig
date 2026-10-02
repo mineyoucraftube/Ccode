@@ -1,0 +1,26 @@
+Ccode
+project
+vars{
+  SDK_DIR = $(PWD)/../repo_tools
+  REPO_LIBS_PREFIX = $(PWD)/../repo_libs
+  INCLUDES = -I$(BUILD_DIR)/lib/out
+  CFLAGS = $(INCLUDES) -g
+}
+dirs{
+  src
+}
+
+libs{
+  openGL
+  lib_imgui
+}
+arch{
+  x86_64{
+    CC=gcc
+    CPP=g++
+    AR=ar
+    LD=g++
+    CFLAGS=
+    LDFLAGS=
+  }
+}
