@@ -296,7 +296,7 @@ dirs_s* getr(dirs_s* dir) {
   dirs_s* newdir = new dirs_s;
   newdir->sub_entries = new dirs_s[num_items];
   newdir->num_sub = num_items;
-  for (fs::directory_iterator entry(dir->entry->path(), fserror); itemi < dir->num_sub && begin(entry) != end(entry); entry.increment(fserror)) {  // if(fserror.value() !=0) entry->disable_recursion_pending();
+  for (fs::directory_iterator entry(dir->entry->path(), fserror); itemi < newdir->num_sub && begin(entry) != end(entry); entry.increment(fserror)) {  // if(fserror.value() !=0) entry->disable_recursion_pending();
     newdir->sub_entries[itemi++].entry = new fs::directory_entry(entry->path());
   }
   return newdir;
@@ -331,9 +331,10 @@ void dirs_s::refresh() {
       dirs_s* newdir = getr(this);
       for (unsigned long i = 0; i < num_sub; i++) {
         sub_entries[i].refresh();
+        if (sub_entries[i].entry == nullptr) continue;
         bool should_delete = 1;
         for (unsigned long j = 0; j < newdir->num_sub; j++) {
-          if (sub_entries[i].entry == newdir->sub_entries[j].entry) {
+          if (*sub_entries[i].entry == *newdir->sub_entries[j].entry) {
             delete newdir->sub_entries[j].entry;
             newdir->sub_entries[j] = sub_entries[i];
             should_delete = 0;

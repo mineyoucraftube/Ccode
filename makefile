@@ -3,7 +3,7 @@ PROJECT_NAME=Ccode
 SDK_DIR = $(PWD)/../repo_tools
 REPO_LIBS_PREFIX = $(PWD)/../repo_libs
 INCLUDES = -I$(BUILD_DIR)/lib/out
-CFLAGS = $(INCLUDES) -g
+CFLAGS = $(INCLUDES) -g -std=c++20
 
 BUILD_DIR = $(PWD)/build
 OUT_DIR = $(BUILD_DIR)/out
